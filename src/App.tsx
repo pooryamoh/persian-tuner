@@ -5,6 +5,7 @@ import { PitchDetector } from "pitchy";
 import Koron from "./components/Koron";
 import Sori from "./components/Sori";
 import Diese from "./components/Diese";
+import GaugeComponent from "react-gauge-component";
 
 type Note = {
   index: number;
@@ -94,8 +95,7 @@ export default function App() {
                       borderRight: "1px solid black",
                       height: "100%",
                     }}
-                  >
-                  </span>
+                  ></span>
                 )}
                 <span style={{ fontSize: 40 }}>
                   {note.title}
@@ -117,6 +117,70 @@ export default function App() {
             Math.round(24 * Math.log2(pitch / 440))) *
             25}
         </span>
+      )}
+      {pitch && (
+        <div style={{ height: "30rem", width: "30rem", marginTop: "2rem" }}>
+          <GaugeComponent
+            type="semicircle"
+            arc={{
+              width: 0.2,
+              padding: 0.005,
+              cornerRadius: 1,
+              // gradient: true,
+              subArcs: [
+                {
+                  limit: -15,
+                  color: "#EA4228",
+                  showTick: true,
+                },
+                {
+                  limit: -5,
+                  color: "#F5CD19",
+                  showTick: true,
+                },
+                {
+                  limit: 5,
+                  color: "#5BE12C",
+                  showTick: true,
+                },
+                {
+                  limit: 15,
+                  color: "#F5CD19",
+                  showTick: true,
+                },
+                {
+                  color: "#EA4228",
+                },
+              ],
+            }}
+            pointer={{
+              color: "#345243",
+              length: 0.8,
+              width: 15,
+              // elastic: true,
+            }}
+            labels={{
+              valueLabel: {
+                formatTextValue: (value) => value + "¢",
+              },
+              tickLabels: {
+                type: "outer",
+                defaultTickValueConfig: {
+                  formatTextValue: (value: unknown) => value + "¢",
+                  style: { fontSize: 10 },
+                },
+                ticks: [{ value: -25 }, { value: 0 }, { value: 25 }],
+              },
+            }}
+            value={
+              (24 * Math.log2(pitch / 440) -
+                Math.round(24 * Math.log2(pitch / 440))) *
+              25
+            }
+            minValue={-25}
+            maxValue={25}
+          />
+        </div>
       )}
     </div>
   );
