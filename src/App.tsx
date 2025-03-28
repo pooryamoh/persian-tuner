@@ -1,5 +1,5 @@
 import { useInterval } from "usehooks-ts";
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import useAnalyser from "./useAnalyser";
 import { PitchDetector } from "pitchy";
 import Koron from "./components/Koron";
@@ -64,7 +64,23 @@ export default function App() {
     },
     ctx && analyser ? 100 : null
   );
+  const cent = pitch
+    ? (24 * Math.log2(pitch / 440) - Math.round(24 * Math.log2(pitch / 440))) *
+      25
+    : undefined;
 
+  const noteIndex = pitch
+    ? ((Math.round(24 * Math.log2(pitch / 440)) % 24) + 24) % 24
+    : undefined;
+  const centColor = useCallback((value: number) => {
+    if (value <= 5) return "#5BE12C";
+    if (value <= 15) return "#F5CD19";
+    if (value <= 25) return "#EA4228";
+    return "#0a0a0a";
+  }, []);
+  const getIndex = useCallback((current: number, toNext: number) => {
+    return (((current + toNext) % 24) + 24) % 24;
+  }, []);
   return (
     <div
       style={{
@@ -78,15 +94,20 @@ export default function App() {
       <button onClick={startAnalyser}>start</button>
       {pitch && `${pitch} Hz`}
       {pitch && (
-        <div style={{ display: "flex" }}>
+        <div style={{ display: "flex", gap: "0.5rem" }}>
           {notes
-            .filter(
-              (note) =>
-                note.index ===
-                ((Math.round(24 * Math.log2(pitch / 440)) % 24) + 24) % 24
-            )
+            .filter((note) => note.index === getIndex(noteIndex!, -2))
             .map((note, index) => (
-              <>
+              <div
+                style={{
+                  border: `1px solid #BEBEBE`,
+                  borderRadius: "0.5rem",
+                  padding: "0.5rem",
+                  backgroundColor: `#BEBEBE55`,
+                  color: "black",
+                  transform: "scale(0.50)",
+                }}
+              >
                 {index !== 0 && (
                   <span
                     style={{
@@ -97,7 +118,7 @@ export default function App() {
                     }}
                   ></span>
                 )}
-                <span style={{ fontSize: 40 }}>
+                <span style={{ fontSize: "2rem" }}>
                   {note.title}
                   {note.icon}
                   <sub>
@@ -107,16 +128,149 @@ export default function App() {
                       )}
                   </sub>
                 </span>
-              </>
+              </div>
+            ))}
+          {notes
+            .filter((note) => note.index === getIndex(noteIndex!, -1))
+            .map((note, index) => (
+              <div
+                style={{
+                  border: `1px solid #BEBEBE`,
+                  borderRadius: "0.5rem",
+                  padding: "0.5rem",
+                  backgroundColor: `#BEBEBE55`,
+                  color: "black",
+                  transform: "scale(0.75)",
+                }}
+              >
+                {index !== 0 && (
+                  <span
+                    style={{
+                      borderLeft: "1px solid black",
+                      width: 0,
+                      borderRight: "1px solid black",
+                      height: "100%",
+                    }}
+                  ></span>
+                )}
+                <span style={{ fontSize: "2rem" }}>
+                  {note.title}
+                  {note.icon}
+                  <sub>
+                    {4 +
+                      Math.floor(
+                        Math.log2(pitch / (440 * Math.pow(2, -9 / 12)))
+                      )}
+                  </sub>
+                </span>
+              </div>
+            ))}
+          {notes
+            .filter((note) => note.index === noteIndex)
+            .map((note, index) => (
+              <div
+                style={{
+                  border: `1px solid ${centColor(Math.abs(cent!))}`,
+                  borderRadius: "0.5rem",
+                  padding: "0.5rem",
+                  backgroundColor: `${centColor(Math.abs(cent!))}55`,
+                  color: "black",
+                }}
+              >
+                {index !== 0 && (
+                  <span
+                    style={{
+                      borderLeft: "1px solid black",
+                      width: 0,
+                      borderRight: "1px solid black",
+                      height: "100%",
+                    }}
+                  ></span>
+                )}
+                <span style={{ fontSize: "2rem" }}>
+                  {note.title}
+                  {note.icon}
+                  <sub>
+                    {4 +
+                      Math.floor(
+                        Math.log2(pitch / (440 * Math.pow(2, -9 / 12)))
+                      )}
+                  </sub>
+                </span>
+              </div>
+            ))}
+          {notes
+            .filter((note) => note.index === getIndex(noteIndex!, 1))
+            .map((note, index) => (
+              <div
+                style={{
+                  border: `1px solid #BEBEBE`,
+                  borderRadius: "0.5rem",
+                  padding: "0.5rem",
+                  backgroundColor: `#BEBEBE55`,
+                  color: "black",
+                  transform: "scale(0.75)",
+                }}
+              >
+                {index !== 0 && (
+                  <span
+                    style={{
+                      borderLeft: "1px solid black",
+                      width: 0,
+                      borderRight: "1px solid black",
+                      height: "100%",
+                    }}
+                  ></span>
+                )}
+                <span style={{ fontSize: "2rem" }}>
+                  {note.title}
+                  {note.icon}
+                  <sub>
+                    {4 +
+                      Math.floor(
+                        Math.log2(pitch / (440 * Math.pow(2, -9 / 12)))
+                      )}
+                  </sub>
+                </span>
+              </div>
+            ))}
+
+          {notes
+            .filter((note) => note.index === getIndex(noteIndex!, 2))
+            .map((note, index) => (
+              <div
+                style={{
+                  border: `1px solid #BEBEBE`,
+                  borderRadius: "0.5rem",
+                  padding: "0.5rem",
+                  backgroundColor: `#BEBEBE55`,
+                  color: "black",
+                  transform: "scale(0.5)",
+                }}
+              >
+                {index !== 0 && (
+                  <span
+                    style={{
+                      borderLeft: "1px solid black",
+                      width: 0,
+                      borderRight: "1px solid black",
+                      height: "100%",
+                    }}
+                  ></span>
+                )}
+                <span style={{ fontSize: "2rem" }}>
+                  {note.title}
+                  {note.icon}
+                  <sub>
+                    {4 +
+                      Math.floor(
+                        Math.log2(pitch / (440 * Math.pow(2, -9 / 12)))
+                      )}
+                  </sub>
+                </span>
+              </div>
             ))}
         </div>
-      )}
-      {pitch && (
-        <span>
-          {(24 * Math.log2(pitch / 440) -
-            Math.round(24 * Math.log2(pitch / 440))) *
-            25}
-        </span>
       )}
       {pitch && (
         <div style={{ height: "30rem", width: "30rem", marginTop: "2rem" }}>
@@ -172,11 +326,7 @@ export default function App() {
                 ticks: [{ value: -25 }, { value: 0 }, { value: 25 }],
               },
             }}
-            value={
-              (24 * Math.log2(pitch / 440) -
-                Math.round(24 * Math.log2(pitch / 440))) *
-              25
-            }
+            value={cent}
             minValue={-25}
             maxValue={25}
           />
