@@ -34,6 +34,12 @@ const noteAroundAroundStyle = css`
   transform: scale(0.5);
   display: flex;
 `;
+const noteFontStyle = css`
+  font-size: 1.5rem;
+  @media (min-width: 768px) {
+    font-size: 2rem;
+  }
+`;
 const noteBaseStyle = css`
   border-radius: 0.5rem;
   padding: 0.5rem;
@@ -143,7 +149,7 @@ export default function App() {
               .map((note, index) => (
                 <>
                   {index !== 0 && <div css={sepratorStyle}></div>}
-                  <span style={{ fontSize: "2rem" }}>
+                  <span css={noteFontStyle}>
                     {note.title}
                     {note.icon}
                     <sub>
@@ -162,7 +168,7 @@ export default function App() {
               .map((note, index) => (
                 <>
                   {index !== 0 && <div css={sepratorStyle}></div>}
-                  <span style={{ fontSize: "2rem" }}>
+                  <span css={noteFontStyle}>
                     {note.title}
                     {note.icon}
                     <sub>
@@ -187,7 +193,7 @@ export default function App() {
               .map((note, index) => (
                 <>
                   {index !== 0 && <span css={sepratorStyle}></span>}
-                  <span style={{ fontSize: "2rem" }}>
+                  <span css={noteFontStyle}>
                     {note.title}
                     {note.icon}
                     <sub>
@@ -206,7 +212,7 @@ export default function App() {
               .map((note, index) => (
                 <>
                   {index !== 0 && <div css={sepratorStyle}></div>}
-                  <span style={{ fontSize: "2rem" }}>
+                  <span css={noteFontStyle}>
                     {note.title}
                     {note.icon}
                     <sub>
@@ -225,7 +231,7 @@ export default function App() {
               .map((note, index) => (
                 <>
                   {index !== 0 && <div css={sepratorStyle}></div>}
-                  <span style={{ fontSize: "2rem" }}>
+                  <span css={noteFontStyle}>
                     {note.title}
                     {note.icon}
                     <sub>
@@ -241,7 +247,17 @@ export default function App() {
         </div>
       )}
       {pitch && (
-        <div style={{ height: "30rem", width: "30rem", marginTop: "2rem" }}>
+        <div
+          css={css`
+            height: 25rem;
+            width: 25rem;
+            margin-top: 2rem;
+            @media (min-width: 768px) {
+              height: 30rem;
+              width: 30rem;
+            }
+          `}
+        >
           <GaugeComponent
             type="semicircle"
             arc={{
@@ -290,7 +306,7 @@ export default function App() {
                 type: "outer",
                 defaultTickValueConfig: {
                   formatTextValue: (value: unknown) => value + "¢",
-                  style: { fontSize: 10 },
+                  style: { fontSize: 10, fill: "black" },
                 },
                 ticks: [{ value: -25 }, { value: 0 }, { value: 25 }],
               },
