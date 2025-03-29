@@ -47,11 +47,13 @@ const notes: Note[] = [
 ];
 
 export default function App() {
+  const [start, setStart] = useState(false);
   const [pitch, setPitch] = useState<number | undefined>(undefined);
   const { startAnalyser, ctx, analyser } = useAnalyser();
   useInterval(
     () => {
       if (analyser && ctx) {
+        setStart(true);
         const bufferLength = analyser.frequencyBinCount;
         const dataArray = new Float32Array(bufferLength);
         const detector = PitchDetector.forFloat32Array(
@@ -91,8 +93,16 @@ export default function App() {
         height: "100vh",
       }}
     >
-      <button onClick={startAnalyser}>start</button>
-      {pitch && `${pitch} Hz`}
+      {!start && (
+        <button
+          className="rounded-md bg-blue-600 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-blue-700 focus:shadow-none active:bg-blue-700 hover:bg-blue-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none ml-2"
+          type="button"
+          onClick={startAnalyser}
+        >
+          start
+        </button>
+      )}
+      {pitch && <div style={{ fontSize: "2rem" }}>{pitch.toFixed(2)} Hz</div>}
       {pitch && (
         <div style={{ display: "flex", gap: "0.5rem" }}>
           {notes
@@ -316,6 +326,7 @@ export default function App() {
             labels={{
               valueLabel: {
                 formatTextValue: (value) => value + "¢",
+                matchColorWithArc: true,
               },
               tickLabels: {
                 type: "outer",

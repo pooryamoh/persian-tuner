@@ -10,10 +10,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@tailwindcss/vite": "^4.0.17",
     "pitchy": "^4.1.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-gauge-component": "^1.2.64",
+    "tailwindcss": "^4.0.17",
     "usehooks-ts": "^3.1.1"
   },
   "devDependencies": {
