@@ -26,7 +26,6 @@ const sepratorStyle = css`
   border-left: 1px solid black;
   width: 0;
   border-right: 1px solid black;
-  height: 100%;
   margin-inline-start: 0.5rem;
   margin-inline-end: 0.5rem;
 `;
