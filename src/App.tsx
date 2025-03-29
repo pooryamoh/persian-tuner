@@ -6,7 +6,38 @@ import Koron from "./components/Koron";
 import Sori from "./components/Sori";
 import Diese from "./components/Diese";
 import GaugeComponent from "react-gauge-component";
-
+import { css } from "@emotion/react";
+const noteAroundStyle = css`
+  border: 1px solid #bebebe;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  background-color: #bebebe55;
+  color: black;
+  transform: scale(0.75);
+  display: flex;
+`;
+const sepratorStyle = css`
+  border-left: 1px solid black;
+  width: 0;
+  border-right: 1px solid black;
+  height: 100%;
+  margin-inline-start: 0.5rem;
+  margin-inline-end: 0.5rem;
+`;
+const noteAroundAroundStyle = css`
+  border: 1px solid #bebebe;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  background-color: #bebebe55;
+  color: black;
+  transform: scale(0.5);
+  display: flex;
+`;
+const noteBaseStyle = css`
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  color: black;
+`;
 type Note = {
   index: number;
   title: string;
@@ -91,34 +122,23 @@ export default function App() {
         height: "100vh",
       }}
     >
-      <button onClick={startAnalyser}>start</button>
+      <button
+        css={{
+          color: "hotpink",
+        }}
+        onClick={startAnalyser}
+      >
+        start
+      </button>
       {pitch && `${pitch} Hz`}
       {pitch && (
         <div style={{ display: "flex", gap: "0.5rem" }}>
-          <div
-            style={{
-              border: `1px solid #BEBEBE`,
-              borderRadius: "0.5rem",
-              padding: "0.5rem",
-              backgroundColor: `#BEBEBE55`,
-              color: "black",
-              transform: "scale(0.50)",
-            }}
-          >
+          <div css={noteAroundAroundStyle}>
             {notes
               .filter((note) => note.index === getIndex(noteIndex!, -2))
               .map((note, index) => (
                 <>
-                  {index !== 0 && (
-                    <span
-                      style={{
-                        borderLeft: "1px solid black",
-                        width: 0,
-                        borderRight: "1px solid black",
-                        height: "100%",
-                      }}
-                    ></span>
-                  )}
+                  {index !== 0 && <div css={sepratorStyle}></div>}
                   <span style={{ fontSize: "2rem" }}>
                     {note.title}
                     {note.icon}
@@ -132,30 +152,12 @@ export default function App() {
                 </>
               ))}
           </div>
-          <div
-            style={{
-              border: `1px solid #BEBEBE`,
-              borderRadius: "0.5rem",
-              padding: "0.5rem",
-              backgroundColor: `#BEBEBE55`,
-              color: "black",
-              transform: "scale(0.75)",
-            }}
-          >
+          <div css={noteAroundStyle}>
             {notes
               .filter((note) => note.index === getIndex(noteIndex!, -1))
               .map((note, index) => (
                 <>
-                  {index !== 0 && (
-                    <span
-                      style={{
-                        borderLeft: "1px solid black",
-                        width: 0,
-                        borderRight: "1px solid black",
-                        height: "100%",
-                      }}
-                    ></span>
-                  )}
+                  {index !== 0 && <div css={sepratorStyle}></div>}
                   <span style={{ fontSize: "2rem" }}>
                     {note.title}
                     {note.icon}
@@ -170,28 +172,17 @@ export default function App() {
               ))}
           </div>
           <div
-            style={{
-              border: `1px solid ${centColor(Math.abs(cent!))}`,
-              borderRadius: "0.5rem",
-              padding: "0.5rem",
-              backgroundColor: `${centColor(Math.abs(cent!))}55`,
-              color: "black",
-            }}
+            css={css`
+              ${noteBaseStyle};
+              border: 1px solid ${centColor(Math.abs(cent!))};
+              background-color: ${centColor(Math.abs(cent!))}55;
+            `}
           >
             {notes
               .filter((note) => note.index === noteIndex)
               .map((note, index) => (
                 <>
-                  {index !== 0 && (
-                    <span
-                      style={{
-                        borderLeft: "1px solid black",
-                        width: 0,
-                        borderRight: "1px solid black",
-                        height: "100%",
-                      }}
-                    ></span>
-                  )}
+                  {index !== 0 && <span css={sepratorStyle}></span>}
                   <span style={{ fontSize: "2rem" }}>
                     {note.title}
                     {note.icon}
@@ -205,33 +196,12 @@ export default function App() {
                 </>
               ))}
           </div>
-          <div
-            style={{
-              border: `1px solid #BEBEBE`,
-              borderRadius: "0.5rem",
-              padding: "0.5rem",
-              backgroundColor: `#BEBEBE55`,
-              color: "black",
-              transform: "scale(0.75)",
-              display:"flex"
-            }}
-          >
+          <div css={noteAroundStyle}>
             {notes
               .filter((note) => note.index === getIndex(noteIndex!, 1))
               .map((note, index) => (
                 <>
-                  {index !== 0 && (
-                    <div
-                      style={{
-                        borderLeft: "1px solid black",
-                        width: 0,
-                        borderRight: "1px solid black",
-                        marginInlineStart: "0.5rem",
-                        marginInlineEnd: "0.5rem",
-                        height: "100%",
-                      }}
-                    ></div>
-                  )}
+                  {index !== 0 && <div css={sepratorStyle}></div>}
                   <span style={{ fontSize: "2rem" }}>
                     {note.title}
                     {note.icon}
@@ -245,30 +215,12 @@ export default function App() {
                 </>
               ))}
           </div>
-          <div
-            style={{
-              border: `1px solid #BEBEBE`,
-              borderRadius: "0.5rem",
-              padding: "0.5rem",
-              backgroundColor: `#BEBEBE55`,
-              color: "black",
-              transform: "scale(0.5)",
-            }}
-          >
+          <div css={noteAroundAroundStyle}>
             {notes
               .filter((note) => note.index === getIndex(noteIndex!, 2))
               .map((note, index) => (
                 <>
-                  {index !== 0 && (
-                    <span
-                      style={{
-                        borderLeft: "1px solid black",
-                        width: 0,
-                        borderRight: "1px solid black",
-                        height: "100%",
-                      }}
-                    ></span>
-                  )}
+                  {index !== 0 && <div css={sepratorStyle}></div>}
                   <span style={{ fontSize: "2rem" }}>
                     {note.title}
                     {note.icon}
