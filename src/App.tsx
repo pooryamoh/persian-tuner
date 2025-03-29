@@ -11,11 +11,16 @@ import { css } from "@emotion/react";
 const noteAroundStyle = css`
   border: 1px solid #bebebe;
   border-radius: 0.5rem;
-  padding: 0.5rem;
   background-color: #bebebe55;
   color: black;
-  transform: scale(0.75);
   display: flex;
+  align-self: center;
+  font-size: ${2 * 0.75 * 0.75}rem;
+  padding: ${0.5 * 0.75 * 0.75}rem;
+  @media (min-width: 768px) {
+    font-size: ${2 * 0.75}rem;
+    padding: ${0.5 * 0.75}rem;
+  }
 `;
 const sepratorStyle = css`
   border-left: 1px solid black;
@@ -28,22 +33,27 @@ const sepratorStyle = css`
 const noteAroundAroundStyle = css`
   border: 1px solid #bebebe;
   border-radius: 0.5rem;
-  padding: 0.5rem;
   background-color: #bebebe55;
   color: black;
-  transform: scale(0.5);
   display: flex;
-`;
-const noteFontStyle = css`
-  font-size: 1.5rem;
+  display: flex;
+  align-self: center;
+  font-size: ${2 * 0.5 * 0.75}rem;
+  padding: ${0.5 * 0.5 * 0.75}rem;
   @media (min-width: 768px) {
-    font-size: 2rem;
+    font-size: ${2 * 0.5}rem;
+    padding: ${0.5 * 0.5}rem;
   }
 `;
+
 const noteBaseStyle = css`
   border-radius: 0.5rem;
   padding: 0.5rem;
   color: black;
+  font-size: 1.5rem;
+  @media (min-width: 768px) {
+    font-size: 2rem;
+  }
 `;
 type Note = {
   index: number;
@@ -142,14 +152,14 @@ export default function App() {
       )}
       {pitch && <div style={{ fontSize: "2rem" }}>{pitch.toFixed(2)} Hz</div>}
       {pitch && (
-        <div style={{ display: "flex", gap: "0.5rem" }}>
+        <div style={{ display: "flex", gap: "0.5rem", alignItems: "center" }}>
           <div css={noteAroundAroundStyle}>
             {notes
               .filter((note) => note.index === getIndex(noteIndex!, -2))
               .map((note, index) => (
                 <>
                   {index !== 0 && <div css={sepratorStyle}></div>}
-                  <span css={noteFontStyle}>
+                  <span>
                     {note.title}
                     {note.icon}
                     <sub>
@@ -168,7 +178,7 @@ export default function App() {
               .map((note, index) => (
                 <>
                   {index !== 0 && <div css={sepratorStyle}></div>}
-                  <span css={noteFontStyle}>
+                  <span>
                     {note.title}
                     {note.icon}
                     <sub>
@@ -193,7 +203,7 @@ export default function App() {
               .map((note, index) => (
                 <>
                   {index !== 0 && <span css={sepratorStyle}></span>}
-                  <span css={noteFontStyle}>
+                  <span>
                     {note.title}
                     {note.icon}
                     <sub>
@@ -212,7 +222,7 @@ export default function App() {
               .map((note, index) => (
                 <>
                   {index !== 0 && <div css={sepratorStyle}></div>}
-                  <span css={noteFontStyle}>
+                  <span>
                     {note.title}
                     {note.icon}
                     <sub>
@@ -231,7 +241,7 @@ export default function App() {
               .map((note, index) => (
                 <>
                   {index !== 0 && <div css={sepratorStyle}></div>}
-                  <span css={noteFontStyle}>
+                  <span>
                     {note.title}
                     {note.icon}
                     <sub>
