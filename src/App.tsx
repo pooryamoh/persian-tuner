@@ -95,181 +95,193 @@ export default function App() {
       {pitch && `${pitch} Hz`}
       {pitch && (
         <div style={{ display: "flex", gap: "0.5rem" }}>
-          {notes
-            .filter((note) => note.index === getIndex(noteIndex!, -2))
-            .map((note, index) => (
-              <div
-                style={{
-                  border: `1px solid #BEBEBE`,
-                  borderRadius: "0.5rem",
-                  padding: "0.5rem",
-                  backgroundColor: `#BEBEBE55`,
-                  color: "black",
-                  transform: "scale(0.50)",
-                }}
-              >
-                {index !== 0 && (
-                  <span
-                    style={{
-                      borderLeft: "1px solid black",
-                      width: 0,
-                      borderRight: "1px solid black",
-                      height: "100%",
-                    }}
-                  ></span>
-                )}
-                <span style={{ fontSize: "2rem" }}>
-                  {note.title}
-                  {note.icon}
-                  <sub>
-                    {4 +
-                      Math.floor(
-                        Math.log2(pitch / (440 * Math.pow(2, -9 / 12)))
-                      )}
-                  </sub>
-                </span>
-              </div>
-            ))}
-          {notes
-            .filter((note) => note.index === getIndex(noteIndex!, -1))
-            .map((note, index) => (
-              <div
-                style={{
-                  border: `1px solid #BEBEBE`,
-                  borderRadius: "0.5rem",
-                  padding: "0.5rem",
-                  backgroundColor: `#BEBEBE55`,
-                  color: "black",
-                  transform: "scale(0.75)",
-                }}
-              >
-                {index !== 0 && (
-                  <span
-                    style={{
-                      borderLeft: "1px solid black",
-                      width: 0,
-                      borderRight: "1px solid black",
-                      height: "100%",
-                    }}
-                  ></span>
-                )}
-                <span style={{ fontSize: "2rem" }}>
-                  {note.title}
-                  {note.icon}
-                  <sub>
-                    {4 +
-                      Math.floor(
-                        Math.log2(pitch / (440 * Math.pow(2, -9 / 12)))
-                      )}
-                  </sub>
-                </span>
-              </div>
-            ))}
-          {notes
-            .filter((note) => note.index === noteIndex)
-            .map((note, index) => (
-              <div
-                style={{
-                  border: `1px solid ${centColor(Math.abs(cent!))}`,
-                  borderRadius: "0.5rem",
-                  padding: "0.5rem",
-                  backgroundColor: `${centColor(Math.abs(cent!))}55`,
-                  color: "black",
-                }}
-              >
-                {index !== 0 && (
-                  <span
-                    style={{
-                      borderLeft: "1px solid black",
-                      width: 0,
-                      borderRight: "1px solid black",
-                      height: "100%",
-                    }}
-                  ></span>
-                )}
-                <span style={{ fontSize: "2rem" }}>
-                  {note.title}
-                  {note.icon}
-                  <sub>
-                    {4 +
-                      Math.floor(
-                        Math.log2(pitch / (440 * Math.pow(2, -9 / 12)))
-                      )}
-                  </sub>
-                </span>
-              </div>
-            ))}
-          {notes
-            .filter((note) => note.index === getIndex(noteIndex!, 1))
-            .map((note, index) => (
-              <div
-                style={{
-                  border: `1px solid #BEBEBE`,
-                  borderRadius: "0.5rem",
-                  padding: "0.5rem",
-                  backgroundColor: `#BEBEBE55`,
-                  color: "black",
-                  transform: "scale(0.75)",
-                }}
-              >
-                {index !== 0 && (
-                  <span
-                    style={{
-                      borderLeft: "1px solid black",
-                      width: 0,
-                      borderRight: "1px solid black",
-                      height: "100%",
-                    }}
-                  ></span>
-                )}
-                <span style={{ fontSize: "2rem" }}>
-                  {note.title}
-                  {note.icon}
-                  <sub>
-                    {4 +
-                      Math.floor(
-                        Math.log2(pitch / (440 * Math.pow(2, -9 / 12)))
-                      )}
-                  </sub>
-                </span>
-              </div>
-            ))}
-
-          {notes
-            .filter((note) => note.index === getIndex(noteIndex!, 2))
-            .map((note, index) => (
-              <div
-                style={{
-                  border: `1px solid #BEBEBE`,
-                  borderRadius: "0.5rem",
-                  padding: "0.5rem",
-                  backgroundColor: `#BEBEBE55`,
-                  color: "black",
-                  transform: "scale(0.5)",
-                }}
-              >
-                {index !== 0 && (
-                  <span
-                    style={{
-                      borderLeft: "1px solid black",
-                      width: 0,
-                      borderRight: "1px solid black",
-                      height: "100%",
-                    }}
-                  ></span>
-                )}
-                <span style={{ fontSize: "2rem" }}>
-                  {note.title}
-                  {note.icon}
-                  <sub>
-                    {4 +
-                      Math.floor(
-                        Math.log2(pitch / (440 * Math.pow(2, -9 / 12)))
-                      )}
-                  </sub>
-                </span>
-              </div>
-            ))}
+          <div
+            style={{
+              border: `1px solid #BEBEBE`,
+              borderRadius: "0.5rem",
+              padding: "0.5rem",
+              backgroundColor: `#BEBEBE55`,
+              color: "black",
+              transform: "scale(0.50)",
+            }}
+          >
+            {notes
+              .filter((note) => note.index === getIndex(noteIndex!, -2))
+              .map((note, index) => (
+                <>
+                  {index !== 0 && (
+                    <span
+                      style={{
+                        borderLeft: "1px solid black",
+                        width: 0,
+                        borderRight: "1px solid black",
+                        height: "100%",
+                      }}
+                    ></span>
+                  )}
+                  <span style={{ fontSize: "2rem" }}>
+                    {note.title}
+                    {note.icon}
+                    <sub>
+                      {4 +
+                        Math.floor(
+                          Math.log2(pitch / (440 * Math.pow(2, -9 / 12)))
+                        )}
+                    </sub>
+                  </span>
+                </>
+              ))}
+          </div>
+          <div
+            style={{
+              border: `1px solid #BEBEBE`,
+              borderRadius: "0.5rem",
+              padding: "0.5rem",
+              backgroundColor: `#BEBEBE55`,
+              color: "black",
+              transform: "scale(0.75)",
+            }}
+          >
+            {notes
+              .filter((note) => note.index === getIndex(noteIndex!, -1))
+              .map((note, index) => (
+                <>
+                  {index !== 0 && (
+                    <span
+                      style={{
+                        borderLeft: "1px solid black",
+                        width: 0,
+                        borderRight: "1px solid black",
+                        height: "100%",
+                      }}
+                    ></span>
+                  )}
+                  <span style={{ fontSize: "2rem" }}>
+                    {note.title}
+                    {note.icon}
+                    <sub>
+                      {4 +
+                        Math.floor(
+                          Math.log2(pitch / (440 * Math.pow(2, -9 / 12)))
+                        )}
+                    </sub>
+                  </span>
+                </>
+              ))}
+          </div>
+          <div
+            style={{
+              border: `1px solid ${centColor(Math.abs(cent!))}`,
+              borderRadius: "0.5rem",
+              padding: "0.5rem",
+              backgroundColor: `${centColor(Math.abs(cent!))}55`,
+              color: "black",
+            }}
+          >
+            {notes
+              .filter((note) => note.index === noteIndex)
+              .map((note, index) => (
+                <>
+                  {index !== 0 && (
+                    <span
+                      style={{
+                        borderLeft: "1px solid black",
+                        width: 0,
+                        borderRight: "1px solid black",
+                        height: "100%",
+                      }}
+                    ></span>
+                  )}
+                  <span style={{ fontSize: "2rem" }}>
+                    {note.title}
+                    {note.icon}
+                    <sub>
+                      {4 +
+                        Math.floor(
+                          Math.log2(pitch / (440 * Math.pow(2, -9 / 12)))
+                        )}
+                    </sub>
+                  </span>
+                </>
+              ))}
+          </div>
+          <div
+            style={{
+              border: `1px solid #BEBEBE`,
+              borderRadius: "0.5rem",
+              padding: "0.5rem",
+              backgroundColor: `#BEBEBE55`,
+              color: "black",
+              transform: "scale(0.75)",
+              display:"flex"
+            }}
+          >
+            {notes
+              .filter((note) => note.index === getIndex(noteIndex!, 1))
+              .map((note, index) => (
+                <>
+                  {index !== 0 && (
+                    <div
+                      style={{
+                        borderLeft: "1px solid black",
+                        width: 0,
+                        borderRight: "1px solid black",
+                        marginInlineStart: "0.5rem",
+                        marginInlineEnd: "0.5rem",
+                        height: "100%",
+                      }}
+                    ></div>
+                  )}
+                  <span style={{ fontSize: "2rem" }}>
+                    {note.title}
+                    {note.icon}
+                    <sub>
+                      {4 +
+                        Math.floor(
+                          Math.log2(pitch / (440 * Math.pow(2, -9 / 12)))
+                        )}
+                    </sub>
+                  </span>
+                </>
+              ))}
+          </div>
+          <div
+            style={{
+              border: `1px solid #BEBEBE`,
+              borderRadius: "0.5rem",
+              padding: "0.5rem",
+              backgroundColor: `#BEBEBE55`,
+              color: "black",
+              transform: "scale(0.5)",
+            }}
+          >
+            {notes
+              .filter((note) => note.index === getIndex(noteIndex!, 2))
+              .map((note, index) => (
+                <>
+                  {index !== 0 && (
+                    <span
+                      style={{
+                        borderLeft: "1px solid black",
+                        width: 0,
+                        borderRight: "1px solid black",
+                        height: "100%",
+                      }}
+                    ></span>
+                  )}
+                  <span style={{ fontSize: "2rem" }}>
+                    {note.title}
+                    {note.icon}
+                    <sub>
+                      {4 +
+                        Math.floor(
+                          Math.log2(pitch / (440 * Math.pow(2, -9 / 12)))
+                        )}
+                    </sub>
+                  </span>
+                </>
+              ))}
+          </div>
         </div>
       )}
       {pitch && (
